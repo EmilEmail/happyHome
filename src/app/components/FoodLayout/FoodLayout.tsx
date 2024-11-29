@@ -1,24 +1,15 @@
 import MainMenu from '@/app/components/menu/MainMenu';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BarMenu from '@/app/components/BarMenu/BarMenu';
-import {
-  BAR_MENU_ITEM,
-  BarMenuItems,
-} from '@/app/components/BarMenu/BarMenuItems';
+import { BarMenuItems } from '@/app/components/BarMenu/BarMenuItems';
 import { Main } from '@/app/globals.style';
+import { BAR_MENU_ITEM } from '@/app/interfaces/BAR_MENU_ITEM';
+import { FoodLayoutProps } from './FoodLayout.props';
 
-export enum PAGE_NAMES {
-  Freeze = 'Freeze',
-  Fridge = 'Fridge',
-  Pantry = 'Pantry',
-}
-
-interface Props {
-  pageName: PAGE_NAMES;
-  children: ReactNode | ReactNode[];
-}
-
-export default function FoodLayout({ children, pageName }: Props) {
+export default function FoodLayout({
+  children,
+  pageName,
+}: FoodLayoutProps) {
   const [activeBarMenuItem, setActiveBarMenuItem] =
     useState<BAR_MENU_ITEM>();
 

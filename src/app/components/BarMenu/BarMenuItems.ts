@@ -1,11 +1,6 @@
-import { PAGE_NAMES } from '../FoodLayout/FoodLayout';
+import { BAR_MENU_ITEM } from '@/app/interfaces/BAR_MENU_ITEM';
 
-export interface BAR_MENU_ITEM {
-  name: string;
-  href: string;
-}
-
-export const BarMenuItems = [
+export const BarMenuItems: BAR_MENU_ITEM[] = [
   { name: 'Freeze', href: '/freeze' },
   { name: 'Fridge', href: '/fridge' },
   { name: 'Pantry', href: '/pantry' },

@@ -1,58 +1,15 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import FormInput from './FormInput';
-import styled from '@emotion/styled';
 import ConfirmButtons from '../ConfirmButtons/ConfirmButtons';
-
-export enum InputTypes {
-  text = 'text',
-  number = 'number',
-  submit = 'submit',
-  checkbox = 'checkbox',
-}
-
-const ModalWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-
-  position: fixed;
-  top: 0;
-  left: 0;
-`;
-
-const ModalForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 3rem;
-`;
-
-export interface MODAL_PROPERTIES {
-  type: InputTypes;
-  label: string;
-  placeholder?: string;
-  callback?: (arg: string) => void;
-}
-
-interface FORM_INFO {
-  label: string;
-  indexKey: number;
-  type: InputTypes;
-}
-
-interface Props {
-  modalProperties: MODAL_PROPERTIES[];
-  onFormAction: (data: MODAL_PROPERTIES[]) => void;
-  setModalOn: Dispatch<SetStateAction<boolean>>;
-}
+import { ModalWrapper, ModalForm } from './Modal.style';
+import { InputTypes } from './enums';
+import { ModalProps, FORM_INFO } from './interfaces';
 
 export default function Modal({
   modalProperties,
   onFormAction,
   setModalOn,
-}: Props) {
+}: ModalProps) {
   const [allFormInfo, setAllFormInfo] = useState<FORM_INFO[]>([]);
 
   const handleConfirm = () => {

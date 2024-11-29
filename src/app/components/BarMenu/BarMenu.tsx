@@ -1,30 +1,11 @@
-import styled from '@emotion/styled';
 import React from 'react';
-import { BAR_MENU_ITEM, BarMenuItems } from './BarMenuItems';
-import Link from 'next/link';
-
-const BarMenuWrapper = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  background-color: aqua;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-`;
-
-const MenuItem = styled(Link)`
-  width: 100%;
-  padding: 1rem;
-  background-color: black;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-`;
-const ActiveMenuItem = styled(MenuItem)`
-  background-color: red;
-`;
+import { BarMenuItems } from './BarMenuItems';
+import {
+  ActiveMenuItem,
+  MenuItem,
+  BarMenuWrapper,
+} from './BarMenu.style';
+import { BAR_MENU_ITEM } from '@/app/interfaces/BAR_MENU_ITEM';
 
 interface Props {
   activeBarMenuItem: BAR_MENU_ITEM;
