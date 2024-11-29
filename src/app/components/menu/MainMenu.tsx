@@ -8,7 +8,8 @@ import Link from 'next/link';
 import FoodIcon from '@/app/assets/svg/food-icon.svg';
 import HomeIcon from '@/app/assets/svg/home-icon.svg';
 import Image from 'next/image';
-import Modal, { InputTypes } from '../FormModal/Modal';
+import { InputTypes } from '../FormModal/enums';
+import Modal from '../FormModal/Modal';
 
 const MainMenuWrapper = styled.nav`
   width: 100vw;

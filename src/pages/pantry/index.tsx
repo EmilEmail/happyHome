@@ -1,6 +1,5 @@
-import FoodLayout, {
-  PAGE_NAMES,
-} from '@/app/components/FoodLayout/FoodLayout';
+import { PAGE_NAMES } from '@/app/components/FoodLayout/enums';
+import FoodLayout from '@/app/components/FoodLayout/FoodLayout';
 import React from 'react';
 
 export default function Pantry() {

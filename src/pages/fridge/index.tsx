@@ -1,11 +1,10 @@
 import { FOOD_LIST_MOCK } from '@/app/assets/mock_data/FOOD_LIST';
-import FoodLayout, {
-  PAGE_NAMES,
-} from '@/app/components/FoodLayout/FoodLayout';
+import FoodLayout from '@/app/components/FoodLayout/FoodLayout';
 import { Platform } from '@/app/globals.style';
 import { FOOD_INTERFACE } from '@/app/interfaces/FOOD_INTERFACE';
 import React from 'react';
 import Image from 'next/image';
+import { PAGE_NAMES } from '@/app/components/FoodLayout/enums';
 
 export default function Fridge() {
   const createPlatform = (foodList: FOOD_INTERFACE[]) => {

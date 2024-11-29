@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { InputTypes, MODAL_PROPERTIES } from './Modal';
 import styled from '@emotion/styled';
 import { COLORS } from '@/app/utils/Colors';
+import { MODAL_PROPERTIES } from './interfaces';
+import { InputTypes } from './enums';
 
 const Label = styled.label`
   display: flex;
