@@ -1,10 +1,12 @@
 'use client';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 import FreezerImg from '@/app/assets/img/freezer.jpg';
-import FridgeImg from '@/app/assets/img/fridge.png';
-import PantryImg from '@/app/assets/img/pantry.jpg';
 import styled from '@emotion/styled';
+import Tesseract from 'tesseract.js';
+import { resolve } from 'dns';
+import LoadBar from '@/app/components/LoadBar/LoadBar';
+import CameraScan from '@/app/components/Camera/CameraScan';
 
 const DashboardWrapper = styled.main`
   display: flex;
@@ -38,22 +40,22 @@ const HolderWrapper = styled.section`
   }
 `;
 
-const DASHBOARD_MOCK = {
-  name: 'Fridge',
-  soonExpiredProducts: [{ name: '' }],
-};
-
 export default function Dashboard() {
+  const [progress, setProgress] = useState(0);
+
   const asyncFunction = async () => {
-    const test = await fetch('/api/init');
+    // const test = await fetch('/api/init');
   };
   useEffect(() => {
     asyncFunction();
   }, []);
+
   return (
     <DashboardWrapper>
+      <CameraScan />
+
       <HolderWrapper>
-        <Image
+        <NextImage
           src={FreezerImg}
           alt="freezer"
           width={48}
@@ -66,6 +68,7 @@ export default function Dashboard() {
         <p>Test 243242</p>
         <p>Test 243</p>
       </HolderWrapper>
+      <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     </DashboardWrapper>
   );
 }

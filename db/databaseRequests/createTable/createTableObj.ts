@@ -1,4 +1,3 @@
-import { validateTableInsert } from '../post/utils/validateTableInsert';
 import Database from 'better-sqlite3';
 
 const db = new Database('../../database.db');
@@ -21,10 +20,7 @@ export const createTableObj = async (
         (${itemProperties.map(() => '?')});
     `;
 
-  const isValid = await validateTableInsert(
-    tableName,
-    itemProperties
-  );
+  const isValid = true;
   if (!isValid) {
   }
   const tablePropertiesInsert = itemProperties.map(
