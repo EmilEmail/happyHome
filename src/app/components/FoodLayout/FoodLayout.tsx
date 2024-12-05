@@ -24,7 +24,7 @@ export default function FoodLayout({
       {activeBarMenuItem && (
         <BarMenu activeBarMenuItem={activeBarMenuItem} />
       )}
-      <MainMenu />
+      <MainMenu pageName={pageName} />
       {children}
     </Main>
   );

@@ -1,15 +1,42 @@
-import { FOOD_LIST_MOCK } from '@/app/assets/mock_data/FOOD_LIST';
+import '@/app/globals.css';
 import FoodLayout from '@/app/components/FoodLayout/FoodLayout';
 import { Platform } from '@/app/globals.style';
-import { FOOD_INTERFACE } from '@/app/interfaces/FOOD_INTERFACE';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { PAGE_NAMES } from '@/app/components/FoodLayout/enums';
+import { FOOD_CATEGORY_INTERFACE } from '@/app/interfaces/FOOD_CATEGORY_INTERFACE';
+import Link from 'next/link';
+import styled from '@emotion/styled';
+
+const CountCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid black;
+  background-color: red;
+  color: white;
+`;
 
 export default function Fridge() {
-  const createPlatform = (foodList: FOOD_INTERFACE[]) => {
-    let list: FOOD_INTERFACE[] = [];
-    const renderList: FOOD_INTERFACE[][] = [];
+  const [categoryList, setCategoryList] = useState<
+    FOOD_CATEGORY_INTERFACE[]
+  >([]);
+  const asyncFunction = async () => {
+    const response = await fetch('/api/get/food_categories');
+    const res = await response.json();
+    console.log(res);
+    setCategoryList(res.data);
+  };
+  useEffect(() => {
+    asyncFunction();
+  }, []);
+
+  const createPlatform = (foodList: FOOD_CATEGORY_INTERFACE[]) => {
+    let list: FOOD_CATEGORY_INTERFACE[] = [];
+    const renderList: FOOD_CATEGORY_INTERFACE[][] = [];
     foodList.forEach((food, i) => {
       if (i === renderList.length * 4) {
         renderList.push(list);
@@ -24,17 +51,20 @@ export default function Fridge() {
     return renderList.map((food, key) => (
       <Platform key={key}>
         {food.map((item, i) => (
-          <div key={i}>
-            <p className="item-name">{item.name}</p>
-            {item.icon && (
-              <Image
-                src={item.icon}
-                height={48}
-                width={48}
-                alt="icon"
-              />
-            )}
-          </div>
+          <Link key={i} href={`/fridge/${item.name}`}>
+            <div>
+              <CountCircle>{item.itemCount}</CountCircle>
+              <p className="item-name">{item.label}</p>
+              {item.icon && (
+                <Image
+                  src={item.icon}
+                  height={48}
+                  width={48}
+                  alt="icon"
+                />
+              )}
+            </div>
+          </Link>
         ))}
         <div className="stand" />
       </Platform>
@@ -42,7 +72,7 @@ export default function Fridge() {
   };
   return (
     <FoodLayout pageName={PAGE_NAMES.Fridge}>
-      {createPlatform(FOOD_LIST_MOCK)}
+      {categoryList && createPlatform(categoryList)}
     </FoodLayout>
   );
 }

@@ -10,6 +10,11 @@ import HomeIcon from '@/app/assets/svg/home-icon.svg';
 import Image from 'next/image';
 import { InputTypes } from '../FormModal/enums';
 import Modal from '../FormModal/Modal';
+import { PAGE_NAMES } from '../FoodLayout/enums';
+import {
+  FORM_INFO_OUTPUT,
+  OnFormActionProps,
+} from '../FormModal/interfaces';
 
 const MainMenuWrapper = styled.nav`
   width: 100vw;
@@ -56,9 +61,23 @@ const AddButton = styled.button`
 //   AddFood = 'AddFood',
 // }
 
-export default function MainMenu() {
+interface Props {
+  pageName: string;
+}
+
+export default function MainMenu({ pageName }: Props) {
   const [modalOn, setModalOn] = useState(false);
-  //   const [modalType, setModalType] = useState(MODAL_TYPES.AddFood);
+
+  const handleFormAction = async (data: OnFormActionProps) => {
+    const response = await fetch('/api/create/category', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    if (responseData) {
+      alert('yeeey');
+    }
+  };
 
   return (
     <MainMenuWrapper>
@@ -83,18 +102,17 @@ export default function MainMenu() {
       </MenuButton>
       {modalOn && (
         <Modal
+          chooseIcon
           setModalOn={setModalOn}
           modalProperties={[
-            { type: InputTypes.text, label: 'Testar...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
-            { type: InputTypes.text, label: 'Testar igen...' },
+            {
+              type: InputTypes.text,
+              label: 'Namn',
+              placeholder: 'name',
+            },
           ]}
-          onFormAction={(e) => console.log(e)}
+          onFormAction={handleFormAction}
+          headline={'Lägg till ny kategori'}
         />
       )}
     </MainMenuWrapper>

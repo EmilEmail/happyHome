@@ -1,5 +1,5 @@
-export enum PAGE_NAMES {
-  Freeze = 'Freeze',
-  Fridge = 'Fridge',
-  Pantry = 'Pantry',
-}
+export const PAGE_NAMES = {
+  Freeze: 'Freeze',
+  Fridge: 'Fridge',
+  Pantry: 'Pantry',
+};

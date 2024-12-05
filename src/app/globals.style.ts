@@ -8,15 +8,11 @@ export const Main = styled.main`
   border-top-right-radius: 4rem;
   border-top-left-radius: 4rem;
   border: 4px solid ${COLORS.black};
-  width: calc(100vw - 2.5rem);
+  width: calc(100vw);
   min-height: 100vh;
   padding: 4rem 1rem;
   background-color: blue;
   margin-top: 2rem;
-
-  position: absolute;
-  top: 0;
-  left: 0;
 `;
 
 export const Platform = styled.section`
@@ -39,5 +35,6 @@ export const Platform = styled.section`
     font-size: 0.7rem;
     font-weight: 900;
     text-align: center;
+    color: black;
   }
 `;

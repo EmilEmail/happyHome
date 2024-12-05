@@ -1,32 +1,33 @@
+import { validateTableInsert } from '../post/utils/validateTableInsert';
 import Database from 'better-sqlite3';
-import { validateTableInsert } from './utils/validateTableInsert';
+
 const db = new Database('../../database.db');
 db.pragma('journal_mode = WAL');
 
-export interface TableProperties {
+export interface ItemProperties {
   property: string;
   value: string | number;
 }
 
 export const createTableObj = async (
   tableName: string,
-  tableProperties: TableProperties[]
+  itemProperties: ItemProperties[]
 ) => {
   const sql = `
-        INSERT INTO ${tableName} (${tableProperties.map(
+        INSERT INTO ${tableName} (${itemProperties.map(
     (property) => property.property
   )})
         VALUES
-        (${tableProperties.map(() => '?')});
+        (${itemProperties.map(() => '?')});
     `;
 
   const isValid = await validateTableInsert(
     tableName,
-    tableProperties
+    itemProperties
   );
   if (!isValid) {
   }
-  const tablePropertiesInsert = tableProperties.map(
+  const tablePropertiesInsert = itemProperties.map(
     (property) => property.value
   );
 

@@ -4,17 +4,48 @@ import ConfirmButtons from '../ConfirmButtons/ConfirmButtons';
 import { ModalWrapper, ModalForm } from './Modal.style';
 import { InputTypes } from './enums';
 import { ModalProps, FORM_INFO } from './interfaces';
+import { ExistingIconListURL } from '@/app/assets/consts/existingIcons';
+import styled from '@emotion/styled';
+import Image from 'next/image';
+
+const StyledSelect = styled.select`
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 4px gray;
+`;
+const StyledImage = styled(Image)`
+  margin-top: 1rem;
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px gray;
+  align-self: center;
+`;
 
 export default function Modal({
   modalProperties,
   onFormAction,
   setModalOn,
+  chooseIcon,
+  headline,
 }: ModalProps) {
   const [allFormInfo, setAllFormInfo] = useState<FORM_INFO[]>([]);
+  const [selectedImage, setSelectedImage] = useState<
+    | {
+        url: string;
+        name: string;
+      }
+    | ''
+  >();
 
   const handleConfirm = () => {
     //TODO: validation
-    onFormAction(allFormInfo);
+    const newList = allFormInfo.map((i) => ({
+      text: i.label,
+      inputIndex: i.indexKey,
+      property: i.placeholder,
+    }));
+    onFormAction({ infoList: newList, icon: selectedImage });
     setModalOn(false);
     setAllFormInfo([]);
   };
@@ -26,7 +57,8 @@ export default function Modal({
   const handleAllFormInfoUpdate = (
     label: string,
     indexKey: number,
-    type: InputTypes
+    type: InputTypes,
+    placeholder: string
   ) => {
     const exists = allFormInfo.find(
       (data) => data.indexKey === indexKey
@@ -43,23 +75,62 @@ export default function Modal({
           label,
           indexKey,
           type,
+          placeholder,
         },
       ]);
     }
   };
 
+  console.log(selectedImage);
+
   return (
     <ModalWrapper>
       <ModalForm>
+        <h1 style={{ textAlign: 'center', marginBottom: 24 }}>
+          {headline}
+        </h1>
         {modalProperties.map((inputProperty, key) => (
           <FormInput
             key={key}
             inputProperty={inputProperty}
             onChange={(str) =>
-              handleAllFormInfoUpdate(str, key, inputProperty.type)
+              handleAllFormInfoUpdate(
+                str,
+                key,
+                inputProperty.type,
+                inputProperty.placeholder.toLowerCase()
+              )
             }
           />
         ))}
+        <StyledSelect
+          onChange={(e) => {
+            if (e.target.value.length) {
+              setSelectedImage({
+                name: e.target.value,
+                url: `/svg/${e.target.value}.svg`,
+              });
+            } else {
+              setSelectedImage(undefined);
+            }
+          }}
+        >
+          <option value="">Select icon</option>
+          {chooseIcon &&
+            ExistingIconListURL.map((icon, i) => (
+              <option key={i} value={icon.name}>
+                {icon.name}
+              </option>
+            ))}
+        </StyledSelect>
+        {selectedImage && selectedImage.url && (
+          <StyledImage
+            src={selectedImage.url}
+            width={50}
+            height={50}
+            alt="icon"
+          />
+        )}
         <ConfirmButtons
           okText="Lägg till"
           cancelText="Avbryt"

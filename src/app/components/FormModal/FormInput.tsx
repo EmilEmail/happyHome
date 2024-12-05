@@ -32,7 +32,7 @@ export default function FormInput({
   if (inputProperty.type === InputTypes.text) {
     const oneLine = inputProperty.label.replaceAll(' ', '-');
     return (
-      <Label>
+      <Label htmlFor={oneLine}>
         {inputProperty.label}
         <input
           type="text"

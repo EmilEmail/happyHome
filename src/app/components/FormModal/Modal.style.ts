@@ -17,4 +17,7 @@ export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
   padding: 3rem;
+  border-radius: 1rem;
+  border: 1px solid gray;
+  background-color: beige;
 `;
