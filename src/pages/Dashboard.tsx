@@ -3,10 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import NextImage from 'next/image';
 import FreezerImg from '@/app/assets/img/freezer.jpg';
 import styled from '@emotion/styled';
-import Tesseract from 'tesseract.js';
-import { resolve } from 'dns';
-import LoadBar from '@/app/components/LoadBar/LoadBar';
-import CameraScan from '@/app/components/Camera/CameraScan';
+import MainMenu from '@/app/components/menu/MainMenu';
+import { useCameraScan } from '@/app/components/Camera/CameraScan';
 
 const DashboardWrapper = styled.main`
   display: flex;
@@ -41,8 +39,6 @@ const HolderWrapper = styled.section`
 `;
 
 export default function Dashboard() {
-  const [progress, setProgress] = useState(0);
-
   const asyncFunction = async () => {
     // const test = await fetch('/api/init');
   };
@@ -52,8 +48,10 @@ export default function Dashboard() {
 
   return (
     <DashboardWrapper>
-      <CameraScan />
-
+      <MainMenu
+        pageName="dashboard"
+        textFromImageCallback={(t) => alert(t)}
+      />
       <HolderWrapper>
         <NextImage
           src={FreezerImg}
@@ -68,7 +66,6 @@ export default function Dashboard() {
         <p>Test 243242</p>
         <p>Test 243</p>
       </HolderWrapper>
-      <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     </DashboardWrapper>
   );
 }

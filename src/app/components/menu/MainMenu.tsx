@@ -1,72 +1,45 @@
 'use client';
 
-import React, { useState } from 'react';
-import { COLORS } from '@/app/utils/Colors';
-import styled from '@emotion/styled';
-import Link from 'next/link';
-
+import React, { useEffect, useState } from 'react';
 import FoodIcon from '@/app/assets/svg/food-icon.svg';
 import HomeIcon from '@/app/assets/svg/home-icon.svg';
 import Image from 'next/image';
 import { InputTypes } from '../FormModal/enums';
 import Modal from '../FormModal/Modal';
-import { PAGE_NAMES } from '../FoodLayout/enums';
+import { OnFormActionProps } from '../FormModal/interfaces';
+import { useCameraScan } from '../Camera/CameraScan';
 import {
-  FORM_INFO_OUTPUT,
-  OnFormActionProps,
-} from '../FormModal/interfaces';
-
-const MainMenuWrapper = styled.nav`
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: ${COLORS.alert};
-  border-top: 4px solid black;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-`;
-
-const MenuButton = styled(Link)`
-  padding: 1rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  &:nth-of-type(1) {
-    border-right: 2px solid ${COLORS.black};
-  }
-  &:nth-of-type(2) {
-    border-left: 2px solid ${COLORS.black};
-  }
-`;
-
-const AddButton = styled.button`
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  background-color: ${COLORS.success};
-  position: absolute;
-  top: -36px;
-  font-size: 2rem;
-  font-weight: 100;
-  font-family: 'Courier New', Courier, monospace;
-  border: 4px solid ${COLORS.black};
-  outline: none;
-`;
-
-// enum MODAL_TYPES {
-//   AddFood = 'AddFood',
-// }
+  MainMenuWrapper,
+  BackButton,
+  Video,
+  Canvas,
+  PhotoButton,
+  MenuButton,
+  AddButton,
+} from './MainMenu.style';
 
 interface Props {
   pageName: string;
+  textFromImageCallback: (arg: string) => void;
 }
 
-export default function MainMenu({ pageName }: Props) {
+export default function MainMenu({
+  pageName,
+  textFromImageCallback,
+}: Props) {
   const [modalOn, setModalOn] = useState(false);
+  const [cameraOn, setCameraOn] = useState(false);
+  console.log(pageName);
+
+  const {
+    startCamera,
+    videoRef,
+    canvasRef,
+    takePhoto,
+    text,
+    shutDownCamera,
+    setText,
+  } = useCameraScan();
 
   const handleFormAction = async (data: OnFormActionProps) => {
     const response = await fetch('/api/create/category', {
@@ -79,8 +52,43 @@ export default function MainMenu({ pageName }: Props) {
     }
   };
 
+  useEffect(() => {
+    if (cameraOn) {
+      startCamera();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cameraOn]);
+
+  useEffect(() => {
+    if (text.length) {
+      textFromImageCallback(text);
+      setText('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
+
+  const handleCancel = async () => {
+    shutDownCamera();
+    setCameraOn(false);
+  };
+
   return (
     <MainMenuWrapper>
+      {cameraOn && !text && (
+        <>
+          <BackButton onClick={handleCancel}>Stäng</BackButton>
+          <Video ref={videoRef} autoPlay></Video>
+          <Canvas ref={canvasRef}></Canvas>
+          <PhotoButton
+            onClick={() => {
+              takePhoto();
+              handleCancel();
+            }}
+          >
+            test
+          </PhotoButton>
+        </>
+      )}
       <MenuButton href="/">
         <Image
           src={HomeIcon}
@@ -90,7 +98,13 @@ export default function MainMenu({ pageName }: Props) {
           alt={'food icon'}
         />
       </MenuButton>
-      <AddButton onClick={() => setModalOn(true)}>+</AddButton>
+      <AddButton
+        onClick={() => {
+          setCameraOn(true);
+        }}
+      >
+        +
+      </AddButton>
       <MenuButton href="/fridge">
         <Image
           src={FoodIcon}
