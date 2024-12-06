@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 import FormInput from './FormInput';
 import ConfirmButtons from '../ConfirmButtons/ConfirmButtons';
-import { ModalWrapper, ModalForm } from './Modal.style';
+import {
+  ModalWrapper,
+  ModalForm,
+  StyledImage,
+  StyledSelect,
+} from './Modal.style';
 import { InputTypes } from './enums';
 import { ModalProps, FORM_INFO } from './interfaces';
 import { ExistingIconListURL } from '@/app/assets/consts/existingIcons';
-import styled from '@emotion/styled';
-import Image from 'next/image';
-
-const StyledSelect = styled.select`
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 4px gray;
-`;
-const StyledImage = styled(Image)`
-  margin-top: 1rem;
-  padding: 4px;
-  border-radius: 8px;
-  box-shadow: 0 0 4px gray;
-  align-self: center;
-`;
 
 export default function Modal({
   modalProperties,
@@ -30,13 +19,10 @@ export default function Modal({
   headline,
 }: ModalProps) {
   const [allFormInfo, setAllFormInfo] = useState<FORM_INFO[]>([]);
-  const [selectedImage, setSelectedImage] = useState<
-    | {
-        url: string;
-        name: string;
-      }
-    | ''
-  >();
+  const [selectedImage, setSelectedImage] = useState<{
+    url: string;
+    name: string;
+  }>();
 
   const handleConfirm = () => {
     //TODO: validation
@@ -80,8 +66,6 @@ export default function Modal({
       ]);
     }
   };
-
-  console.log(selectedImage);
 
   return (
     <ModalWrapper>

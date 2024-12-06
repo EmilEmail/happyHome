@@ -1,10 +1,9 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import NextImage from 'next/image';
 import FreezerImg from '@/app/assets/img/freezer.jpg';
 import styled from '@emotion/styled';
 import MainMenu from '@/app/components/menu/MainMenu';
-import { useCameraScan } from '@/app/components/Camera/CameraScan';
 
 const DashboardWrapper = styled.main`
   display: flex;
@@ -40,7 +39,7 @@ const HolderWrapper = styled.section`
 
 export default function Dashboard() {
   const asyncFunction = async () => {
-    // const test = await fetch('/api/init');
+    await fetch('/api/init');
   };
   useEffect(() => {
     asyncFunction();
@@ -51,6 +50,8 @@ export default function Dashboard() {
       <MainMenu
         pageName="dashboard"
         textFromImageCallback={(t) => alert(t)}
+        camera={true}
+        onFormAction={() => {}}
       />
       <HolderWrapper>
         <NextImage

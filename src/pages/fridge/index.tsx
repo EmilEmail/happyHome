@@ -3,10 +3,11 @@ import FoodLayout from '@/app/components/FoodLayout/FoodLayout';
 import { Platform } from '@/app/globals.style';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { PAGE_NAMES } from '@/app/components/FoodLayout/enums';
 import { FOOD_CATEGORY_INTERFACE } from '@/app/interfaces/FOOD_CATEGORY_INTERFACE';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
+import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
 
 const CountCircle = styled.div`
   display: flex;
@@ -27,12 +28,22 @@ export default function Fridge() {
   const asyncFunction = async () => {
     const response = await fetch('/api/get/food_categories');
     const res = await response.json();
-    console.log(res);
     setCategoryList(res.data);
   };
   useEffect(() => {
     asyncFunction();
   }, []);
+
+  const onFormAction = async (data: OnFormActionProps) => {
+    const response = await fetch('/api/create/category', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    if (responseData) {
+      asyncFunction();
+    }
+  };
 
   const createPlatform = (foodList: FOOD_CATEGORY_INTERFACE[]) => {
     let list: FOOD_CATEGORY_INTERFACE[] = [];
@@ -71,7 +82,10 @@ export default function Fridge() {
     ));
   };
   return (
-    <FoodLayout pageName={PAGE_NAMES.Fridge}>
+    <FoodLayout
+      pageName={PAGE_NAMES.Fridge}
+      onFormAction={onFormAction}
+    >
       {categoryList && createPlatform(categoryList)}
     </FoodLayout>
   );

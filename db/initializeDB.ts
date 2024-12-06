@@ -31,18 +31,12 @@ export const initializeApp = async () => {
     await initializeAllFoodCategoriesTable();
     await initializeAllTestFoodItemsToTable();
 
-    const test = await getAllFromDB(
-      InitializeTableNames.food_categories
-    );
-    const test2 = await getAllFromDB(InitializeTableNames.food_items);
-    const test3 = await getAllWhere(
+    await getAllFromDB(InitializeTableNames.food_categories);
+    await getAllFromDB(InitializeTableNames.food_items);
+    await getAllWhere(
       InitializeTableNames.food_items,
       FOOD_CATEGORIES.VeganFood
     );
-
-    console.log('test 1: ', test);
-    console.log('test 1: ', test2);
-    console.log('test 3: ', test3);
   } catch (error) {
     console.log(error);
   }

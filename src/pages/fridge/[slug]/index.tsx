@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { FOOD_ITEM_INTERFACE } from '@/app/mock_data/FOOD_ITEM_LIST_MOCK';
 import MainMenu from '@/app/components/menu/MainMenu';
+import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
 
 const LayoutWrapper = styled.main`
   display: flex;
@@ -37,6 +38,12 @@ const ItemWrapper = styled.div`
   text-align: left;
 `;
 
+interface ResponseData {
+  message: string;
+  data?: FOOD_ITEM_INTERFACE[];
+  backgroundImage?: string;
+}
+
 export default function CategoryLayout() {
   const [allItems, setAllItems] = useState<FOOD_ITEM_INTERFACE[]>([]);
   const [category, setCategory] = useState<string>('');
@@ -48,14 +55,27 @@ export default function CategoryLayout() {
     food_items: 'food_items',
   };
 
-  interface ResponseData {
-    message: string;
-    data?: FOOD_ITEM_INTERFACE[];
-    backgroundImage?: string;
-  }
+  const onFormAction = async (body: OnFormActionProps) => {
+    try {
+      const response = await fetch(
+        'http://localhost:3000/api/create/food_item',
+        {
+          method: 'POST',
+          body: JSON.stringify({ ...body, category }),
+        }
+      );
+      const responseData = await response.json();
+      if (responseData.message === 'ok') {
+        window.location.reload();
+      }
+    } catch (error) {
+      //TODO: felhantering!
+      console.log(error);
+    }
+  };
 
   const fetchData = async () => {
-    const path = window.location.pathname;
+    const path = window.location.pathname.replaceAll('%20', ' ');
     const columnName = path?.split('/')[2];
     const holderName = path?.split('/')[1];
     setCategory(columnName);
@@ -80,7 +100,6 @@ export default function CategoryLayout() {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(allItems);
   return (
     <LayoutWrapper
       style={{
@@ -99,7 +118,11 @@ export default function CategoryLayout() {
             <p>{item.expired}</p>
           </ItemWrapper>
         ))}
-      <MainMenu />
+      <MainMenu
+        pageName={'item'}
+        camera={false}
+        onFormAction={onFormAction}
+      />
     </LayoutWrapper>
   );
 }

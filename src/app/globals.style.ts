@@ -11,7 +11,6 @@ export const Main = styled.main`
   width: calc(100vw);
   min-height: 100vh;
   padding: 4rem 1rem;
-  background-color: blue;
   margin-top: 2rem;
 `;
 
@@ -25,11 +24,12 @@ export const Platform = styled.section`
     background: linear-gradient(
       to left,
       transparent,
-      ${COLORS.white},
+      ${COLORS.silver},
       transparent
     );
     height: 4px;
     width: 100%;
+    margin-bottom: 16px;
   }
   .item-name {
     font-size: 0.7rem;

@@ -27,10 +27,7 @@ export interface OnFormActionProps {
 
 export interface ModalProps {
   modalProperties: MODAL_PROPERTIES[];
-  onFormAction: (data: {
-    infoList: FORM_INFO_OUTPUT[];
-    icon?: { name: string; url: string };
-  }) => void;
+  onFormAction: (arg: OnFormActionProps) => void;
   setModalOn: Dispatch<SetStateAction<boolean>>;
   chooseIcon?: boolean;
   headline: string;

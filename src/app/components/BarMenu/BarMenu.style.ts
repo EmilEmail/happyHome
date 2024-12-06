@@ -19,7 +19,13 @@ export const MenuItem = styled(Link)`
   text-align: center;
   text-decoration: none;
   color: white;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;
 export const ActiveMenuItem = styled(MenuItem)`
   background-color: red;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;

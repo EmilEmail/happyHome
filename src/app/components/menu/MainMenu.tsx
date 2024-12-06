@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react';
 import FoodIcon from '@/app/assets/svg/food-icon.svg';
 import HomeIcon from '@/app/assets/svg/home-icon.svg';
 import Image from 'next/image';
-import { InputTypes } from '../FormModal/enums';
-import Modal from '../FormModal/Modal';
 import { OnFormActionProps } from '../FormModal/interfaces';
 import { useCameraScan } from '../Camera/CameraScan';
 import {
@@ -17,19 +15,23 @@ import {
   MenuButton,
   AddButton,
 } from './MainMenu.style';
+import { getModal } from '../FormModal/getModal';
 
 interface Props {
   pageName: string;
-  textFromImageCallback: (arg: string) => void;
+  textFromImageCallback?: (arg: string) => void;
+  camera: boolean;
+  onFormAction: (arg: OnFormActionProps) => void;
 }
 
 export default function MainMenu({
   pageName,
   textFromImageCallback,
+  camera,
+  onFormAction,
 }: Props) {
   const [modalOn, setModalOn] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
-  console.log(pageName);
 
   const {
     startCamera,
@@ -41,17 +43,6 @@ export default function MainMenu({
     setText,
   } = useCameraScan();
 
-  const handleFormAction = async (data: OnFormActionProps) => {
-    const response = await fetch('/api/create/category', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    if (responseData) {
-      alert('yeeey');
-    }
-  };
-
   useEffect(() => {
     if (cameraOn) {
       startCamera();
@@ -60,7 +51,7 @@ export default function MainMenu({
   }, [cameraOn]);
 
   useEffect(() => {
-    if (text.length) {
+    if (text.length && textFromImageCallback) {
       textFromImageCallback(text);
       setText('');
     }
@@ -100,7 +91,11 @@ export default function MainMenu({
       </MenuButton>
       <AddButton
         onClick={() => {
-          setCameraOn(true);
+          if (camera) {
+            setCameraOn(true);
+          } else {
+            setModalOn(true);
+          }
         }}
       >
         +
@@ -114,21 +109,7 @@ export default function MainMenu({
           alt={'home icon'}
         />
       </MenuButton>
-      {modalOn && (
-        <Modal
-          chooseIcon
-          setModalOn={setModalOn}
-          modalProperties={[
-            {
-              type: InputTypes.text,
-              label: 'Namn',
-              placeholder: 'name',
-            },
-          ]}
-          onFormAction={handleFormAction}
-          headline={'Lägg till ny kategori'}
-        />
-      )}
+      {modalOn && getModal(pageName, setModalOn, onFormAction)}
     </MainMenuWrapper>
   );
 }

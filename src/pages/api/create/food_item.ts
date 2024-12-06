@@ -4,42 +4,35 @@ import { InitializeTableNames } from '../../../../db/utils/initializeAllFoodCate
 import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
 
 // !Helper
-//   name: string;
-//   label: string;
-//   icon?: string;
-//   backgroundImage?: string;
-//   itemCount: number;
+// name: string,
+// expired: string
+// amount: number
+// category: string
 
 interface ResponseData {
   message: string;
 }
 
-export default async function category(
+export default async function food_item(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  const { icon, infoList }: OnFormActionProps = JSON.parse(req.body);
+  const {
+    infoList,
+    category,
+  }: OnFormActionProps & { category: string } = JSON.parse(req.body);
 
-  await createTableObj(InitializeTableNames.food_categories, [
-    {
-      property: 'name',
-      value: infoList[0].text ?? '',
-    },
+  console.log(
+    infoList.map((i) => {
+      return { property: i.property, value: i.text };
+    })
+  );
+
+  await createTableObj(InitializeTableNames.food_items, [
     ...infoList.map((i) => {
       return { property: i.property, value: i.text };
     }),
-    {
-      property: 'icon',
-      value: icon?.url ?? '',
-    },
-    {
-      property: 'backgroundImage',
-      value: 'default',
-    },
-    // {
-    //   property: 'itemCount',
-    //   value: 0,
-    // },
+    { property: 'category', value: category },
   ]);
 
   res.status(200).json({ message: 'ok' });

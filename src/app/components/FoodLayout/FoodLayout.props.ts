@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
-import { PAGE_NAMES } from './enums';
+import { OnFormActionProps } from '../FormModal/interfaces';
 
 export interface FoodLayoutProps {
-  pageName: PAGE_NAMES;
+  pageName: string;
   children: ReactNode | ReactNode[];
+  onFormAction: (arg: OnFormActionProps) => void;
 }
