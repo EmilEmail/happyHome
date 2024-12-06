@@ -1,10 +1,10 @@
 'use client';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 import FreezerImg from '@/app/assets/img/freezer.jpg';
-import FridgeImg from '@/app/assets/img/fridge.png';
-import PantryImg from '@/app/assets/img/pantry.jpg';
 import styled from '@emotion/styled';
+import MainMenu from '@/app/components/menu/MainMenu';
+import { useCameraScan } from '@/app/components/Camera/CameraScan';
 
 const DashboardWrapper = styled.main`
   display: flex;
@@ -38,22 +38,22 @@ const HolderWrapper = styled.section`
   }
 `;
 
-const DASHBOARD_MOCK = {
-  name: 'Fridge',
-  soonExpiredProducts: [{ name: '' }],
-};
-
 export default function Dashboard() {
   const asyncFunction = async () => {
-    const test = await fetch('/api/init');
+    // const test = await fetch('/api/init');
   };
   useEffect(() => {
     asyncFunction();
   }, []);
+
   return (
     <DashboardWrapper>
+      <MainMenu
+        pageName="dashboard"
+        textFromImageCallback={(t) => alert(t)}
+      />
       <HolderWrapper>
-        <Image
+        <NextImage
           src={FreezerImg}
           alt="freezer"
           width={48}
