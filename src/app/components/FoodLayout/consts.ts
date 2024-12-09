@@ -1,5 +1,5 @@
 export const PAGE_NAMES = {
-  Freeze: 'freeze',
+  Freezer: 'freezer',
   Fridge: 'fridge',
   Pantry: 'pantry',
 };

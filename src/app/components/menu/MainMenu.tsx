@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import FoodIcon from '@/app/assets/svg/food-icon.svg';
-import HomeIcon from '@/app/assets/svg/home-icon.svg';
+import FoodIcon from '@/app/assets/svg/shelfs.svg';
+import HomeIcon from '@/app/assets/svg/home.svg';
 import Image from 'next/image';
 import { OnFormActionProps } from '../FormModal/interfaces';
 import { useCameraScan } from '../Camera/CameraScan';
@@ -12,8 +12,8 @@ import {
   Video,
   Canvas,
   PhotoButton,
-  MenuButton,
   AddButton,
+  MenuButton,
 } from './MainMenu.style';
 import { getModal } from '../FormModal/getModal';
 
@@ -22,6 +22,7 @@ interface Props {
   textFromImageCallback?: (arg: string) => void;
   camera: boolean;
   onFormAction: (arg: OnFormActionProps) => void;
+  borderColor: string;
 }
 
 export default function MainMenu({
@@ -29,6 +30,7 @@ export default function MainMenu({
   textFromImageCallback,
   camera,
   onFormAction,
+  borderColor,
 }: Props) {
   const [modalOn, setModalOn] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
@@ -52,6 +54,7 @@ export default function MainMenu({
 
   useEffect(() => {
     if (text.length && textFromImageCallback) {
+      alert(text);
       textFromImageCallback(text);
       setText('');
     }
@@ -64,7 +67,9 @@ export default function MainMenu({
   };
 
   return (
-    <MainMenuWrapper>
+    <MainMenuWrapper
+      style={{ borderTop: `4px solid ${borderColor}` }}
+    >
       {cameraOn && !text && (
         <>
           <BackButton onClick={handleCancel}>Stäng</BackButton>
@@ -80,7 +85,10 @@ export default function MainMenu({
           </PhotoButton>
         </>
       )}
-      <MenuButton href="/">
+      <MenuButton
+        href="/"
+        style={{ borderRight: `2px solid ${borderColor}` }}
+      >
         <Image
           src={HomeIcon}
           priority
@@ -90,6 +98,7 @@ export default function MainMenu({
         />
       </MenuButton>
       <AddButton
+        style={{ border: `4px solid ${borderColor}` }}
         onClick={() => {
           if (camera) {
             setCameraOn(true);
@@ -100,7 +109,10 @@ export default function MainMenu({
       >
         +
       </AddButton>
-      <MenuButton href="/fridge">
+      <MenuButton
+        href="/fridge"
+        style={{ borderLeft: `2px solid ${borderColor}` }}
+      >
         <Image
           src={FoodIcon}
           priority

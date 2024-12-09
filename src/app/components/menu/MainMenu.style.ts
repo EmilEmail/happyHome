@@ -7,8 +7,7 @@ export const MainMenuWrapper = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: ${COLORS.alert};
-  border-top: 4px solid black;
+  background-color: ${COLORS.menuColor};
 
   position: fixed;
   bottom: 0;
@@ -21,26 +20,21 @@ export const MenuButton = styled(Link)`
   display: flex;
   justify-content: center;
   text-decoration: none;
-  &:nth-of-type(1) {
-    border-right: 2px solid ${COLORS.black};
-  }
-  &:nth-of-type(2) {
-    border-left: 2px solid ${COLORS.black};
-  }
 `;
 
 export const AddButton = styled.button`
   border-radius: 50%;
   width: 64px;
   height: 64px;
-  background-color: ${COLORS.success};
+  background: linear-gradient(#fb8585, #954f4f);
   position: absolute;
   top: -36px;
   font-size: 2rem;
   font-weight: 100;
   font-family: 'Courier New', Courier, monospace;
-  border: 4px solid ${COLORS.black};
   outline: none;
+  color: ${COLORS.PantryBg};
+  text-shadow: 0 4px 4px inset ${COLORS.black};
 `;
 
 export const Video = styled.video`

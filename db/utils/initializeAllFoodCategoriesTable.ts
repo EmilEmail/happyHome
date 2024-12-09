@@ -1,6 +1,7 @@
 import { FOOD_CATEGORIES } from '@/app/assets/consts/FOOD_CATEGORIES';
 import { ICONS } from '@/app/assets/consts/ICONS';
 import { createTableObj } from '../databaseRequests/createTable/createTableObj';
+import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
 
 export const InitializeTableNames = {
   food_categories: 'food_categories',
@@ -25,6 +26,10 @@ export const initializeAllFoodCategoriesTable = async () => {
       property: 'backgroundImage',
       value: ICONS.Chicken,
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Freezer,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
     {
@@ -42,6 +47,10 @@ export const initializeAllFoodCategoriesTable = async () => {
     {
       property: 'backgroundImage',
       value: '',
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Fridge,
     },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
@@ -61,6 +70,10 @@ export const initializeAllFoodCategoriesTable = async () => {
       property: 'backgroundImage',
       value: '',
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
     {
@@ -78,6 +91,10 @@ export const initializeAllFoodCategoriesTable = async () => {
     {
       property: 'backgroundImage',
       value: '',
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Freezer,
     },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
@@ -97,6 +114,10 @@ export const initializeAllFoodCategoriesTable = async () => {
       property: 'backgroundImage',
       value: '',
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Freezer,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
     {
@@ -114,6 +135,10 @@ export const initializeAllFoodCategoriesTable = async () => {
     {
       property: 'backgroundImage',
       value: '',
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Freezer,
     },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
@@ -133,6 +158,10 @@ export const initializeAllFoodCategoriesTable = async () => {
       property: 'backgroundImage',
       value: '',
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Freezer,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
     {
@@ -150,6 +179,10 @@ export const initializeAllFoodCategoriesTable = async () => {
     {
       property: 'backgroundImage',
       value: '',
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Freezer,
     },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
@@ -169,6 +202,10 @@ export const initializeAllFoodCategoriesTable = async () => {
       property: 'backgroundImage',
       value: '',
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_categories, [
     {
@@ -186,6 +223,10 @@ export const initializeAllFoodCategoriesTable = async () => {
     {
       property: 'backgroundImage',
       value: ICONS.toppings,
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
     },
   ]);
 };

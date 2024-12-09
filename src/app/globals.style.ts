@@ -1,12 +1,11 @@
 import { COLORS } from '@/app/utils/Colors';
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
   flex: 1;
-  border-top-right-radius: 4rem;
-  border-top-left-radius: 4rem;
   border: 4px solid ${COLORS.black};
   width: calc(100vw);
   min-height: 100vh;
@@ -14,20 +13,19 @@ export const Main = styled.main`
   margin-top: 2rem;
 `;
 
-export const Platform = styled.section`
+export const Platform = styled.section<{
+  backgroundColor?: string;
+  shelfColor?: string;
+}>`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
   text-align: center;
+  margin: 1rem 0rem;
+
   .stand {
     grid-column: 1/5;
-    background: linear-gradient(
-      to left,
-      transparent,
-      ${COLORS.silver},
-      transparent
-    );
-    height: 4px;
+    height: 40px;
     width: 100%;
     margin-bottom: 16px;
   }
@@ -36,5 +34,12 @@ export const Platform = styled.section`
     font-weight: 900;
     text-align: center;
     color: black;
+  }
+`;
+
+export const ShelfImage = styled(Image)`
+  grid-column: 1/5;
+  &:nth-child(1) {
+    display: none;
   }
 `;

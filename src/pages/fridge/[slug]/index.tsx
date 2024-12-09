@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 import { FOOD_ITEM_INTERFACE } from '@/app/mock_data/FOOD_ITEM_LIST_MOCK';
 import MainMenu from '@/app/components/menu/MainMenu';
 import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
+import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
+import { COLORS } from '@/app/utils/Colors';
 
 const LayoutWrapper = styled.main`
   display: flex;
@@ -61,7 +63,11 @@ export default function CategoryLayout() {
         'http://localhost:3000/api/create/food_item',
         {
           method: 'POST',
-          body: JSON.stringify({ ...body, category }),
+          body: JSON.stringify({
+            ...body,
+            category,
+            pageName: PAGE_NAMES.Fridge,
+          }),
         }
       );
       const responseData = await response.json();
@@ -122,6 +128,7 @@ export default function CategoryLayout() {
         pageName={'item'}
         camera={false}
         onFormAction={onFormAction}
+        borderColor={COLORS.fridgeColor}
       />
     </LayoutWrapper>
   );

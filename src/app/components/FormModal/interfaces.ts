@@ -23,6 +23,7 @@ export interface FORM_INFO_OUTPUT {
 export interface OnFormActionProps {
   infoList: FORM_INFO_OUTPUT[];
   icon?: { name: string; url: string };
+  pageName: string;
 }
 
 export interface ModalProps {

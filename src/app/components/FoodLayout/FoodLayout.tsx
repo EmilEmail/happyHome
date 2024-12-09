@@ -32,16 +32,38 @@ export default function FoodLayout({
         return COLORS.PantryBg;
     }
   };
+  const getColor = () => {
+    switch (pageName) {
+      case BarMenuItems[0].name:
+        return COLORS.freezerColor;
+      case BarMenuItems[1].name:
+        return COLORS.fridgeColor;
+      case BarMenuItems[2].name:
+        return COLORS.PantryColor;
+      default:
+        return COLORS.black;
+    }
+  };
 
   return (
-    <Main style={{ backgroundColor: getBgColor() }}>
+    <Main
+      style={{
+        backgroundColor: getBgColor(),
+        borderRight: `4px solid ${getColor()}`,
+        borderLeft: `4px solid ${getColor()}`,
+      }}
+    >
       {activeBarMenuItem && (
-        <BarMenu activeBarMenuItem={activeBarMenuItem} />
+        <BarMenu
+          pageName={pageName}
+          activeBarMenuItem={activeBarMenuItem}
+        />
       )}
       <MainMenu
         pageName={pageName}
         camera={false}
         onFormAction={onFormAction}
+        borderColor={getColor()}
       />
       {children}
     </Main>

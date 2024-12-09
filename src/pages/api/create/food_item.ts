@@ -3,12 +3,6 @@ import { createTableObj } from '../../../../db/databaseRequests/createTable/crea
 import { InitializeTableNames } from '../../../../db/utils/initializeAllFoodCategoriesTable';
 import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
 
-// !Helper
-// name: string,
-// expired: string
-// amount: number
-// category: string
-
 interface ResponseData {
   message: string;
 }
@@ -20,6 +14,7 @@ export default async function food_item(
   const {
     infoList,
     category,
+    pageName,
   }: OnFormActionProps & { category: string } = JSON.parse(req.body);
 
   console.log(
@@ -33,6 +28,7 @@ export default async function food_item(
       return { property: i.property, value: i.text };
     }),
     { property: 'category', value: category },
+    { property: 'holder', value: pageName },
   ]);
 
   res.status(200).json({ message: 'ok' });

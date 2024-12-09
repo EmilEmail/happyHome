@@ -1,32 +1,24 @@
 import '@/app/globals.css';
 import FoodLayout from '@/app/components/FoodLayout/FoodLayout';
-import { Platform } from '@/app/globals.style';
+import { Platform, ShelfImage } from '@/app/globals.style';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FOOD_CATEGORY_INTERFACE } from '@/app/interfaces/FOOD_CATEGORY_INTERFACE';
 import Link from 'next/link';
-import styled from '@emotion/styled';
 import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
 import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
-
-const CountCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1px solid black;
-  background-color: red;
-  color: white;
-`;
+import { CountCircle } from '@/app/components/CountCircle/CountCircle';
+import Shelf from '@/app/assets/svg/fridge-shelf.svg';
 
 export default function Fridge() {
   const [categoryList, setCategoryList] = useState<
     FOOD_CATEGORY_INTERFACE[]
   >([]);
   const asyncFunction = async () => {
-    const response = await fetch('/api/get/food_categories');
+    const response = await fetch('/api/get/food_categories', {
+      method: 'POST',
+      body: JSON.stringify({ pageName: PAGE_NAMES.Fridge }),
+    });
     const res = await response.json();
     setCategoryList(res.data);
   };
@@ -37,7 +29,7 @@ export default function Fridge() {
   const onFormAction = async (data: OnFormActionProps) => {
     const response = await fetch('/api/create/category', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, pageName: PAGE_NAMES.Fridge }),
     });
     const responseData = await response.json();
     if (responseData) {
@@ -72,12 +64,13 @@ export default function Fridge() {
                   height={48}
                   width={48}
                   alt="icon"
+                  style={{ marginBottom: '-4px' }}
                 />
               )}
             </div>
           </Link>
         ))}
-        <div className="stand" />
+        <ShelfImage src={Shelf} alt="shelf" />
       </Platform>
     ));
   };

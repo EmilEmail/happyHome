@@ -24,7 +24,7 @@ export function useCameraScan() {
   const canvasRef = useRef(null);
 
   const shutDownCamera = () => {
-    // Always shutdown camera first before you remove the video element
+    //! Always shutdown camera first before you remove the video element
     if (videoRef.current) {
       const camera = videoRef.current as HTMLVideoElement;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

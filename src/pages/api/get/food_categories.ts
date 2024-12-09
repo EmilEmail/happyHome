@@ -1,8 +1,8 @@
-import { getAllFromDB } from '../../../../db/databaseRequests/get/AllFromDB';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { InitializeTableNames } from '../../../../db/utils/initializeAllFoodCategoriesTable';
 import { FOOD_CATEGORY_INTERFACE } from '@/app/interfaces/FOOD_CATEGORY_INTERFACE';
 import { countItemsInCategory } from '../../../../db/utils/CountCategory';
+import { getAllFromHolder } from '../../../../db/databaseRequests/get/getAllWhere';
 
 type ResponseData = {
   message: string;
@@ -13,9 +13,11 @@ export default async function food_categories(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
+  const { pageName } = JSON.parse(req.body);
   const allItems =
-    ((await getAllFromDB(
-      InitializeTableNames.food_categories
+    ((await getAllFromHolder(
+      InitializeTableNames.food_categories,
+      pageName
     )) as FOOD_CATEGORY_INTERFACE[]) ?? [];
 
   const newItemsList = await Promise.all(

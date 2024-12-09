@@ -10,14 +10,14 @@ import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
 import { CountCircle } from '@/app/components/CountCircle/CountCircle';
 import Shelf from '@/app/assets/svg/fridge-shelf.svg';
 
-export default function Pantry() {
+export default function Freezer() {
   const [categoryList, setCategoryList] = useState<
     FOOD_CATEGORY_INTERFACE[]
   >([]);
   const asyncFunction = async () => {
     const response = await fetch('/api/get/food_categories', {
-      body: JSON.stringify({ pageName: PAGE_NAMES.Pantry }),
       method: 'POST',
+      body: JSON.stringify({ pageName: PAGE_NAMES.Freezer }),
     });
     const res = await response.json();
     setCategoryList(res.data);
@@ -29,7 +29,7 @@ export default function Pantry() {
   const onFormAction = async (data: OnFormActionProps) => {
     const response = await fetch('/api/create/category', {
       method: 'POST',
-      body: JSON.stringify({ ...data, pageName: PAGE_NAMES.Fridge }),
+      body: JSON.stringify({ ...data, pageName: PAGE_NAMES.Freezer }),
     });
     const responseData = await response.json();
     if (responseData) {
@@ -54,7 +54,7 @@ export default function Pantry() {
     return renderList.map((food, key) => (
       <Platform key={key}>
         {food.map((item, i) => (
-          <Link key={i} href={`/pantry/${item.name}`}>
+          <Link key={i} href={`/freezer/${item.name}`}>
             <div>
               <CountCircle>{item.itemCount}</CountCircle>
               <p className="item-name">{item.label}</p>
@@ -76,7 +76,7 @@ export default function Pantry() {
   };
   return (
     <FoodLayout
-      pageName={PAGE_NAMES.Pantry}
+      pageName={PAGE_NAMES.Freezer}
       onFormAction={onFormAction}
     >
       {categoryList && createPlatform(categoryList)}

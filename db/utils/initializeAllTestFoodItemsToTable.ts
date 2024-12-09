@@ -1,3 +1,4 @@
+import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
 import { createTableObj } from '../databaseRequests/createTable/createTableObj';
 import { InitializeTableNames } from './initializeAllFoodCategoriesTable';
 import { FOOD_CATEGORIES } from '@/app/assets/consts/FOOD_CATEGORIES';
@@ -20,6 +21,10 @@ export const initializeAllTestFoodItemsToTable = async () => {
       property: 'category',
       value: FOOD_CATEGORIES.Chicken,
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_items, [
     {
@@ -37,6 +42,10 @@ export const initializeAllTestFoodItemsToTable = async () => {
     {
       property: 'category',
       value: FOOD_CATEGORIES.Chicken,
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
     },
   ]);
   await createTableObj(InitializeTableNames.food_items, [
@@ -56,6 +65,10 @@ export const initializeAllTestFoodItemsToTable = async () => {
       property: 'category',
       value: FOOD_CATEGORIES.toppings,
     },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
+    },
   ]);
   await createTableObj(InitializeTableNames.food_items, [
     {
@@ -73,6 +86,10 @@ export const initializeAllTestFoodItemsToTable = async () => {
     {
       property: 'category',
       value: FOOD_CATEGORIES.VeganFood,
+    },
+    {
+      property: 'holder',
+      value: PAGE_NAMES.Pantry,
     },
   ]);
 };

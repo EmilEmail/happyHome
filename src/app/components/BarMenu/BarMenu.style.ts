@@ -22,10 +22,11 @@ export const MenuItem = styled(Link)`
   &::first-letter {
     text-transform: uppercase;
   }
+  border-bottom: 4px solid black;
 `;
 export const ActiveMenuItem = styled(MenuItem)`
-  background-color: red;
   &::first-letter {
     text-transform: uppercase;
   }
+  border-bottom: none !important;
 `;
