@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
 import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
 import { CountCircle } from '@/app/components/CountCircle/CountCircle';
-import Shelf from '@/app/assets/svg/fridge-shelf.svg';
+import Shelf from '@/app/assets/svg/freezer_shelf.svg';
 
 export default function Freezer() {
   const [categoryList, setCategoryList] = useState<

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { OnFormActionProps } from '@/app/components/FormModal/interfaces';
 import { PAGE_NAMES } from '@/app/components/FoodLayout/consts';
 import { CountCircle } from '@/app/components/CountCircle/CountCircle';
-import Shelf from '@/app/assets/svg/fridge-shelf.svg';
+import Shelf from '@/app/assets/svg/pantry-shelf.svg';
 
 export default function Pantry() {
   const [categoryList, setCategoryList] = useState<
