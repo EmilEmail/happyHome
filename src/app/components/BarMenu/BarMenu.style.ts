@@ -19,6 +19,7 @@ export const MenuItem = styled(Link)`
   text-align: center;
   text-decoration: none;
   color: white;
+  box-shadow: -4px 0px 4px inset black;
   &::first-letter {
     text-transform: uppercase;
   }
@@ -29,4 +30,5 @@ export const ActiveMenuItem = styled(MenuItem)`
     text-transform: uppercase;
   }
   border-bottom: none !important;
+  box-shadow: none !important;
 `;

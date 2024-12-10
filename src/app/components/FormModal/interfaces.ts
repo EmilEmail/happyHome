@@ -32,4 +32,5 @@ export interface ModalProps {
   setModalOn: Dispatch<SetStateAction<boolean>>;
   chooseIcon?: boolean;
   headline: string;
+  pageName: string;
 }

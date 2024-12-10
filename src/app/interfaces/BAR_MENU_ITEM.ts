@@ -3,4 +3,5 @@ export interface BAR_MENU_ITEM {
   href: string;
   bgColor: string;
   color: string;
+  icon: string;
 }

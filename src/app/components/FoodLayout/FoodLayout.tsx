@@ -25,21 +25,21 @@ export default function FoodLayout({
   const getBgColor = () => {
     switch (pageName) {
       case BarMenuItems[0].name:
-        return COLORS.freezerBg;
+        return COLORS.PantryBg;
       case BarMenuItems[1].name:
         return COLORS.fridgeBg;
       case BarMenuItems[2].name:
-        return COLORS.PantryBg;
+        return COLORS.freezerBg;
     }
   };
   const getColor = () => {
     switch (pageName) {
       case BarMenuItems[0].name:
-        return COLORS.freezerColor;
+        return COLORS.PantryColor;
       case BarMenuItems[1].name:
         return COLORS.fridgeColor;
       case BarMenuItems[2].name:
-        return COLORS.PantryColor;
+        return COLORS.freezerColor;
       default:
         return COLORS.black;
     }

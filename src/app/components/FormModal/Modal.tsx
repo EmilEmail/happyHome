@@ -17,6 +17,7 @@ export default function Modal({
   setModalOn,
   chooseIcon,
   headline,
+  pageName,
 }: ModalProps) {
   const [allFormInfo, setAllFormInfo] = useState<FORM_INFO[]>([]);
   const [selectedImage, setSelectedImage] = useState<{
@@ -31,7 +32,11 @@ export default function Modal({
       inputIndex: i.indexKey,
       property: i.placeholder,
     }));
-    onFormAction({ infoList: newList, icon: selectedImage });
+    onFormAction({
+      infoList: newList,
+      icon: selectedImage,
+      pageName,
+    });
     setModalOn(false);
     setAllFormInfo([]);
   };

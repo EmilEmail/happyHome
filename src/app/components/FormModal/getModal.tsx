@@ -23,6 +23,7 @@ export const getModal = (
           ]}
           onFormAction={onFormAction}
           headline={'Lägg till ny kategori'}
+          pageName={pageName}
         />
       );
 
@@ -50,6 +51,7 @@ export const getModal = (
           ]}
           onFormAction={onFormAction}
           headline={'Lägg till i kylen'}
+          pageName={pageName}
         />
       );
   }

@@ -8,6 +8,7 @@ import {
 import { BAR_MENU_ITEM } from '@/app/interfaces/BAR_MENU_ITEM';
 import { PAGE_NAMES } from '../FoodLayout/consts';
 import { COLORS } from '@/app/utils/Colors';
+import Image from 'next/image';
 
 interface Props {
   activeBarMenuItem: BAR_MENU_ITEM;
@@ -41,7 +42,7 @@ export default function BarMenu({
             border: `4px solid ${item.color}`,
           }}
         >
-          {item.name}
+          <Image src={item.icon} alt="icon" width={48} height={48} />
         </ActiveMenuItem>
       );
     } else {
@@ -55,7 +56,7 @@ export default function BarMenu({
             borderBottom: `4px solid ${getColor()}`,
           }}
         >
-          {item.name}
+          <Image src={item.icon} alt="icon" width={48} height={48} />
         </MenuItem>
       );
     }
