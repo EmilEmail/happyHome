@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { InputTypes } from './enums';
 import Modal from './Modal';
 import { OnFormActionProps } from './interfaces';
+import { PAGE_NAMES } from '../FoodLayout/consts';
 
 export const getModal = (
   pageName: string,
@@ -9,7 +10,9 @@ export const getModal = (
   onFormAction: (data: OnFormActionProps) => void
 ) => {
   switch (pageName) {
-    case 'fridge':
+    case PAGE_NAMES.Freezer:
+    case PAGE_NAMES.Fridge:
+    case PAGE_NAMES.Pantry:
       return (
         <Modal
           chooseIcon

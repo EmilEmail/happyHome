@@ -19,7 +19,7 @@ export const MenuItem = styled(Link)`
   text-align: center;
   text-decoration: none;
   color: white;
-  box-shadow: -4px 0px 4px inset black;
+  box-shadow: 4px 2px 4px inset black;
   &::first-letter {
     text-transform: uppercase;
   }

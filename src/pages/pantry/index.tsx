@@ -29,7 +29,7 @@ export default function Pantry() {
   const onFormAction = async (data: OnFormActionProps) => {
     const response = await fetch('/api/create/category', {
       method: 'POST',
-      body: JSON.stringify({ ...data, pageName: PAGE_NAMES.Fridge }),
+      body: JSON.stringify({ ...data, pageName: PAGE_NAMES.Pantry }),
     });
     const responseData = await response.json();
     if (responseData) {
@@ -54,7 +54,7 @@ export default function Pantry() {
     return renderList.map((food, key) => (
       <Platform key={key}>
         {food.map((item, i) => (
-          <Link key={i} href={`/pantry/${item.name}`}>
+          <Link key={i} href={`/food/${item.name}`}>
             <div>
               <CountCircle>{item.itemCount}</CountCircle>
               <p className="item-name">{item.label}</p>

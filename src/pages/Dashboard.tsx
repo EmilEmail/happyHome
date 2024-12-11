@@ -4,6 +4,7 @@ import NextImage from 'next/image';
 import FreezerImg from '@/app/assets/img/freezer.jpg';
 import styled from '@emotion/styled';
 import MainMenu from '@/app/components/menu/MainMenu';
+import { COLORS } from '@/app/utils/Colors';
 
 const DashboardWrapper = styled.main`
   display: flex;
@@ -52,6 +53,7 @@ export default function Dashboard() {
         textFromImageCallback={(t) => alert(t)}
         camera={true}
         onFormAction={() => {}}
+        borderColor={COLORS.black}
       />
       <HolderWrapper>
         <NextImage

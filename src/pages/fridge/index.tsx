@@ -54,7 +54,7 @@ export default function Fridge() {
     return renderList.map((food, key) => (
       <Platform key={key}>
         {food.map((item, i) => (
-          <Link key={i} href={`/fridge/${item.name}`}>
+          <Link key={i} href={`/food/${item.name}`}>
             <div>
               <CountCircle>{item.itemCount}</CountCircle>
               <p className="item-name">{item.label}</p>
